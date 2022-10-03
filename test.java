@@ -1,15 +1,18 @@
 import java.util.*;
 public class test{
     public static void main(String[] args){
-        ArrayList<Integer> intArray = new ArrayList<Integer>();
-        Scanner reader = new Scanner(System.in);
-        for (int i = 0; i < 10; i++){
-            int n = reader.nextInt();
-            intArray.add(n);
+        String string = "2 + 4 - 20 test 20test*+";
+        List<String> list = new ArrayList<String>();
+        for (String s : string.split(" ")) {
+            // finding only numbers
+            if (s.matches("[0-9]+")) {
+                list.add(s);
+            }
+            // finding only operators
+            else if (s.matches("[+*]")) {
+                list.add(s);
+            }
         }
-        reader.close();
-        for (int i = 0; i < 10; i++){
-            System.out.println(intArray.get(i));
-        }
+            System.out.println(list);
     }
 }
