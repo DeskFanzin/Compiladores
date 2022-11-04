@@ -19,6 +19,9 @@ REM   : '%' ;
 
 OP_PAR: '(' ;
 CL_PAR: ')' ;
+ATTRIB: '=' ;
+
+NAME : 'a' .. 'z'+ ;
 
 NUMBER: '0'..'9'+ ;
 
@@ -41,6 +44,8 @@ program:
     main
     ;
 
+
+
 main:
     {if 1:
         print('.method public static main([Ljava/lang/String;)V\n')
@@ -54,7 +59,7 @@ main:
     }
     ;
 
-statement: st_print
+statement: st_print | st_attrib
     ;
 
 st_print:
@@ -65,6 +70,12 @@ st_print:
     expression CL_PAR
     {if 1:
         print('    invokevirtual java/io/PrintStream/println(I)V\n')
+    }
+    ;
+
+st_attrib: NAME ATTRIB expression
+    {if 1:
+        print('    istore 0')
     }
     ;
 
@@ -95,6 +106,11 @@ factor: NUMBER
     {if 1:
         print('    ldc ' + $NUMBER.text)
         # symbol_table.append($NUMBER.text)
+    }
+    | OP_PAR expression CL_PAR
+    | NAME
+    {if 1:
+        print('    iload 0')
     }
     ;
 

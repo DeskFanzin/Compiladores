@@ -10,6 +10,14 @@
 
 .method public static main([Ljava/lang/String;)V
 
+    ldc 2
+    istore 0
+    getstatic java/lang/System/out Ljava/io/PrintStream;
+    iload 0
+    ldc 10
+    iadd
+    invokevirtual java/io/PrintStream/println(I)V
+
     getstatic java/lang/System/out Ljava/io/PrintStream;
     ldc 1
     ldc 2
