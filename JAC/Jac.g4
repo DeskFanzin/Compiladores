@@ -10,6 +10,7 @@ grammar Jac;
 /*---------------- LEXER RULES ----------------*/
 
 PRINT : 'print' ;
+READINT : 'readint';
 
 PLUS  : '+' ;
 MINUS : '-' ;
@@ -17,16 +18,17 @@ TIMES : '*' ;
 OVER  : '/' ;
 REM   : '%' ;
 
-OP_PAR: '(' ;
-CL_PAR: ')' ;
-ATTRIB: '=' ;
+OP_PAR : '(' ;
+CL_PAR : ')' ;
+ATTRIB : '=' ;
+COMMA : ','  ;
 
 NAME : 'a' .. 'z'+ ;
 
-NUMBER: '0'..'9'+ ;
+NUMBER : '0'..'9'+ ;
 
 SPACE: (' '|'\t'|'\r'|'\n')+ -> skip ;
-COOMENT: '#' ~('\n')* -> skip ;  
+COOMENT: '#' ~('\n')*        -> skip ;  
 
 /*---------------- PARSER RULES ----------------*/
 
@@ -63,14 +65,28 @@ statement: st_print | st_attrib
     ;
 
 st_print:
-    PRINT OP_PAR
+    PRINT OP_PAR (
     {if 1:
         print('    getstatic java/lang/System/out Ljava/io/PrintStream;')
     }
-    expression CL_PAR
+    expression
     {if 1:
-        print('    invokevirtual java/io/PrintStream/println(I)V\n')
+        print('    invokevirtual java/io/PrintStream/print(I)V\n')
     }
+    ( COMMA
+        {if 1:
+        print('    getstatic java/lang/System/out Ljava/io/PrintStream;')
+        } 
+        expression
+        {if 1:
+        print('    invokevirtual java/io/PrintStream/print(I)V\n')
+        }
+    )*
+    )? CL_PAR
+       {if 1:
+        print('    getstatic java/lang/System/out Ljava/io/PrintStream;')
+        print('    invokevirtual java/io/PrintStream/println()V\n')
+        }
     ;
 
 st_attrib: NAME ATTRIB expression
@@ -110,7 +126,13 @@ factor: NUMBER
     | OP_PAR expression CL_PAR
     | NAME
     {if 1:
+        #se $NAME.text não estiver na ST: mostra erro e faz ...
         print('    iload 0')
+    }
+    | READINT OP_PAR CL_PAR
+    {
+        #geração de código de leitura de inteiro
+        print('    invokestatic Runtime/readInt()I')
     }
     ;
 
