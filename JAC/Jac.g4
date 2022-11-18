@@ -4,8 +4,22 @@ grammar Jac;
 
 @parser::header
 {
-# symbol_table = []
+import sys
+
+symbol_table = []
+
+stack_cur = 0
+stack_max = 0
+
+def enit(bytecode, delta):
+    global stack_cur, stack_max
+    print('    '+ bytecode + '    ; delta=' + delta)
+    stack_cur += delta
+    if stack_cur > stack_max:
+    stack_max = stack_cur
 }
+
+
 
 /*---------------- LEXER RULES ----------------*/
 
@@ -57,7 +71,7 @@ main:
         print('    return')
         print('.limit stack 10')
         print('.end method')
-        # print('\n; symbol_table:', symbol_table)
+        print('\n; symbol_table:', symbol_table)
     }
     ;
 
@@ -67,25 +81,25 @@ statement: st_print | st_attrib
 st_print:
     PRINT OP_PAR (
     {if 1:
-        print('    getstatic java/lang/System/out Ljava/io/PrintStream;')
+        enit('    getstatic java/lang/System/out Ljava/io/PrintStream;', +1)
     }
     expression
     {if 1:
-        print('    invokevirtual java/io/PrintStream/print(I)V\n')
+        enit('    invokevirtual java/io/PrintStream/print(I)V\n', -2)
     }
     ( COMMA
         {if 1:
-        print('    getstatic java/lang/System/out Ljava/io/PrintStream;')
+        enit('    getstatic java/lang/System/out Ljava/io/PrintStream;', +1)
         } 
         expression
         {if 1:
-        print('    invokevirtual java/io/PrintStream/print(I)V\n')
+        enit('    invokevirtual java/io/PrintStream/print(I)V\n', -2)
         }
     )*
     )? CL_PAR
        {if 1:
-        print('    getstatic java/lang/System/out Ljava/io/PrintStream;')
-        print('    invokevirtual java/io/PrintStream/println()V\n')
+        enit('    getstatic java/lang/System/out Ljava/io/PrintStream;', +1)
+        enit('    invokevirtual java/io/PrintStream/println()V\n', -1)
         }
     ;
 
@@ -120,19 +134,18 @@ term: factor ( ( op = TIMES | OVER | REM ) factor
 
 factor: NUMBER
     {if 1:
-        print('    ldc ' + $NUMBER.text)
+        print('    ldc ' + $NUMBER.text +1)
         # symbol_table.append($NUMBER.text)
     }
     | OP_PAR expression CL_PAR
     | NAME
     {if 1:
-        #se $NAME.text não estiver na ST: mostra erro e faz ...
         print('    iload 0')
     }
     | READINT OP_PAR CL_PAR
     {
         #geração de código de leitura de inteiro
-        print('    invokestatic Runtime/readInt()I')
+        enit('    invokestatic Runtime/readInt()I', +1)
     }
     ;
 
