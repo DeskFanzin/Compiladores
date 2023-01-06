@@ -36,7 +36,7 @@ stack_cur = 0
 stack_max = 0
 def emit(bytecode, delta):
     global stack_cur, stack_max
-    print('    '+ bytecode + '    ; delta=' + delta)
+    print('    '+ bytecode + '    ; delta=' + str(delta))
     stack_cur += delta
     if stack_cur > stack_max:
         stack_max = stack_cur
@@ -254,12 +254,13 @@ term returns [type]: factor ( ( op = TIMES | OVER | REM ) factor
 
 factor returns [type]: NUMBER
     {if 1:
-        emit('ldc ' + $NUMBER.text +1)
+        emit('ldc ' + $NUMBER.text, +1)
         $type = 'i'
+
     }
     | STRING
     {if 1:
-        emit('ldc ' + $STRING.text +1)
+        emit('ldc ' + $STRING.text, +1)
         $type = 's'
     }
     | OP_PAR e = expression CL_PAR

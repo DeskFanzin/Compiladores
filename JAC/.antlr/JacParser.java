@@ -6,7 +6,7 @@ stack_cur = 0
 stack_max = 0
 def emit(bytecode, delta):
     global stack_cur, stack_max
-    print('    '+ bytecode + '    ; delta=' + delta)
+    print('    '+ bytecode + '    ; delta=' + str(delta))
     stack_cur += delta
     if stack_cur > stack_max:
         stack_max = stack_cur
@@ -893,8 +893,9 @@ public class JacParser extends Parser {
 				setState(128);
 				((FactorContext)_localctx).NUMBER = match(NUMBER);
 				if 1:
-				        emit('ldc ' + (((FactorContext)_localctx).NUMBER!=null?((FactorContext)_localctx).NUMBER.getText():null) +1)
+				        emit('ldc ' + (((FactorContext)_localctx).NUMBER!=null?((FactorContext)_localctx).NUMBER.getText():null), +1)
 				        _localctx.type = 'i'
+
 				    
 				}
 				break;
@@ -904,7 +905,7 @@ public class JacParser extends Parser {
 				setState(130);
 				((FactorContext)_localctx).STRING = match(STRING);
 				if 1:
-				        emit('ldc ' + (((FactorContext)_localctx).STRING!=null?((FactorContext)_localctx).STRING.getText():null) +1)
+				        emit('ldc ' + (((FactorContext)_localctx).STRING!=null?((FactorContext)_localctx).STRING.getText():null), +1)
 				        _localctx.type = 's'
 				    
 				}

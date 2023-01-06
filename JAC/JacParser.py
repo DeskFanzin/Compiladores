@@ -15,7 +15,7 @@ stack_cur = 0
 stack_max = 0
 def emit(bytecode, delta):
     global stack_cur, stack_max
-    print('    '+ bytecode + '    ; delta=' + delta)
+    print('    '+ bytecode + '    ; delta=' + str(delta))
     stack_cur += delta
     if stack_cur > stack_max:
         stack_max = stack_cur
@@ -37,43 +37,44 @@ def serializedATN():
         buf.write("\f\f\16\f\177\13\f\3\f\3\f\3\r\3\r\3\r\3\r\3\r\3\r\3\r")
         buf.write("\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\5\r\u0096")
         buf.write("\n\r\3\r\2\2\16\2\4\6\b\n\f\16\20\22\24\26\30\2\4\3\2")
-        buf.write("\f\21\3\2\7\b\2\u009b\2\32\3\2\2\2\4\35\3\2\2\2\6(\3\2")
+        buf.write("\r\22\3\2\b\t\2\u009b\2\32\3\2\2\2\4\35\3\2\2\2\6(\3\2")
         buf.write("\2\2\b*\3\2\2\2\n>\3\2\2\2\fC\3\2\2\2\16O\3\2\2\2\20T")
         buf.write("\3\2\2\2\22a\3\2\2\2\24f\3\2\2\2\26r\3\2\2\2\30\u0095")
         buf.write("\3\2\2\2\32\33\b\2\1\2\33\34\5\4\3\2\34\3\3\2\2\2\35\37")
         buf.write("\b\3\1\2\36 \5\6\4\2\37\36\3\2\2\2 !\3\2\2\2!\37\3\2\2")
-        buf.write("\2!\"\3\2\2\2\"#\3\2\2\2#$\b\3\1\2$\5\3\2\2\2%)\7\34\2")
+        buf.write("\2!\"\3\2\2\2\"#\3\2\2\2#$\b\3\1\2$\5\3\2\2\2%)\7\35\2")
         buf.write("\2&)\5\b\5\2\')\5\n\6\2(%\3\2\2\2(&\3\2\2\2(\'\3\2\2\2")
-        buf.write(")\7\3\2\2\2*+\7\4\2\2+9\7\22\2\2,-\b\5\1\2-.\5\24\13\2")
-        buf.write(".\66\b\5\1\2/\60\7\27\2\2\60\61\b\5\1\2\61\62\5\24\13")
+        buf.write(")\7\3\2\2\2*+\7\4\2\2+9\7\23\2\2,-\b\5\1\2-.\5\24\13\2")
+        buf.write(".\66\b\5\1\2/\60\7\30\2\2\60\61\b\5\1\2\61\62\5\24\13")
         buf.write("\2\62\63\b\5\1\2\63\65\3\2\2\2\64/\3\2\2\2\658\3\2\2\2")
         buf.write("\66\64\3\2\2\2\66\67\3\2\2\2\67:\3\2\2\28\66\3\2\2\29")
-        buf.write(",\3\2\2\29:\3\2\2\2:;\3\2\2\2;<\7\23\2\2<=\b\5\1\2=\t")
-        buf.write("\3\2\2\2>?\7\30\2\2?@\7\26\2\2@A\5\24\13\2AB\b\6\1\2B")
-        buf.write("\13\3\2\2\2CD\7\3\2\2DE\5\16\b\2EF\b\7\1\2FH\7\24\2\2")
+        buf.write(",\3\2\2\29:\3\2\2\2:;\3\2\2\2;<\7\24\2\2<=\b\5\1\2=\t")
+        buf.write("\3\2\2\2>?\7\31\2\2?@\7\27\2\2@A\5\24\13\2AB\b\6\1\2B")
+        buf.write("\13\3\2\2\2CD\7\3\2\2DE\5\16\b\2EF\b\7\1\2FH\7\25\2\2")
         buf.write("GI\5\6\4\2HG\3\2\2\2IJ\3\2\2\2JH\3\2\2\2JK\3\2\2\2KL\3")
-        buf.write("\2\2\2LM\7\25\2\2MN\b\7\1\2N\r\3\2\2\2OP\5\24\13\2PQ\t")
-        buf.write("\2\2\2QR\5\24\13\2RS\b\b\1\2S\17\3\2\2\2TU\7 \2\2UV\b")
-        buf.write("\t\1\2VW\5\22\n\2WX\b\t\1\2XZ\7\24\2\2Y[\5\6\4\2ZY\3\2")
-        buf.write("\2\2[\\\3\2\2\2\\Z\3\2\2\2\\]\3\2\2\2]^\3\2\2\2^_\7\25")
-        buf.write("\2\2_`\b\t\1\2`\21\3\2\2\2ab\5\24\13\2bc\t\2\2\2cd\5\24")
-        buf.write("\13\2de\b\n\1\2e\23\3\2\2\2fm\5\26\f\2gh\t\3\2\2hi\5\26")
-        buf.write("\f\2ij\b\13\1\2jl\3\2\2\2kg\3\2\2\2lo\3\2\2\2mk\3\2\2")
-        buf.write("\2mn\3\2\2\2np\3\2\2\2om\3\2\2\2pq\b\13\1\2q\25\3\2\2")
-        buf.write("\2r}\5\30\r\2sw\7\t\2\2tw\7\n\2\2uw\7\13\2\2vs\3\2\2\2")
-        buf.write("vt\3\2\2\2vu\3\2\2\2wx\3\2\2\2xy\5\30\r\2yz\b\f\1\2z|")
-        buf.write("\3\2\2\2{v\3\2\2\2|\177\3\2\2\2}{\3\2\2\2}~\3\2\2\2~\u0080")
-        buf.write("\3\2\2\2\177}\3\2\2\2\u0080\u0081\b\f\1\2\u0081\27\3\2")
-        buf.write("\2\2\u0082\u0083\7\31\2\2\u0083\u0096\b\r\1\2\u0084\u0085")
-        buf.write("\7\32\2\2\u0085\u0096\b\r\1\2\u0086\u0087\7\22\2\2\u0087")
-        buf.write("\u0088\5\24\13\2\u0088\u0089\7\23\2\2\u0089\u008a\b\r")
-        buf.write("\1\2\u008a\u0096\3\2\2\2\u008b\u008c\7\30\2\2\u008c\u0096")
-        buf.write("\b\r\1\2\u008d\u008e\7\5\2\2\u008e\u008f\7\22\2\2\u008f")
-        buf.write("\u0090\7\23\2\2\u0090\u0096\b\r\1\2\u0091\u0092\7\6\2")
-        buf.write("\2\u0092\u0093\7\22\2\2\u0093\u0094\7\23\2\2\u0094\u0096")
-        buf.write("\b\r\1\2\u0095\u0082\3\2\2\2\u0095\u0084\3\2\2\2\u0095")
-        buf.write("\u0086\3\2\2\2\u0095\u008b\3\2\2\2\u0095\u008d\3\2\2\2")
-        buf.write("\u0095\u0091\3\2\2\2\u0096\31\3\2\2\2\f!(\669J\\mv}\u0095")
+        buf.write("\2\2\2LM\b\7\1\2MN\7\26\2\2N\r\3\2\2\2OP\5\24\13\2PQ\t")
+        buf.write("\2\2\2QR\5\24\13\2RS\b\b\1\2S\17\3\2\2\2TU\7\7\2\2UV\b")
+        buf.write("\t\1\2VW\5\22\n\2WX\b\t\1\2XZ\7\25\2\2Y[\5\6\4\2ZY\3\2")
+        buf.write("\2\2[\\\3\2\2\2\\Z\3\2\2\2\\]\3\2\2\2]^\3\2\2\2^_\b\t")
+        buf.write("\1\2_`\7\26\2\2`\21\3\2\2\2ab\5\24\13\2bc\t\2\2\2cd\5")
+        buf.write("\24\13\2de\b\n\1\2e\23\3\2\2\2fm\5\26\f\2gh\t\3\2\2hi")
+        buf.write("\5\26\f\2ij\b\13\1\2jl\3\2\2\2kg\3\2\2\2lo\3\2\2\2mk\3")
+        buf.write("\2\2\2mn\3\2\2\2np\3\2\2\2om\3\2\2\2pq\b\13\1\2q\25\3")
+        buf.write("\2\2\2r}\5\30\r\2sw\7\n\2\2tw\7\13\2\2uw\7\f\2\2vs\3\2")
+        buf.write("\2\2vt\3\2\2\2vu\3\2\2\2wx\3\2\2\2xy\5\30\r\2yz\b\f\1")
+        buf.write("\2z|\3\2\2\2{v\3\2\2\2|\177\3\2\2\2}{\3\2\2\2}~\3\2\2")
+        buf.write("\2~\u0080\3\2\2\2\177}\3\2\2\2\u0080\u0081\b\f\1\2\u0081")
+        buf.write("\27\3\2\2\2\u0082\u0083\7\32\2\2\u0083\u0096\b\r\1\2\u0084")
+        buf.write("\u0085\7\33\2\2\u0085\u0096\b\r\1\2\u0086\u0087\7\23\2")
+        buf.write("\2\u0087\u0088\5\24\13\2\u0088\u0089\7\24\2\2\u0089\u008a")
+        buf.write("\b\r\1\2\u008a\u0096\3\2\2\2\u008b\u008c\7\31\2\2\u008c")
+        buf.write("\u0096\b\r\1\2\u008d\u008e\7\5\2\2\u008e\u008f\7\23\2")
+        buf.write("\2\u008f\u0090\7\24\2\2\u0090\u0096\b\r\1\2\u0091\u0092")
+        buf.write("\7\6\2\2\u0092\u0093\7\23\2\2\u0093\u0094\7\24\2\2\u0094")
+        buf.write("\u0096\b\r\1\2\u0095\u0082\3\2\2\2\u0095\u0084\3\2\2\2")
+        buf.write("\u0095\u0086\3\2\2\2\u0095\u008b\3\2\2\2\u0095\u008d\3")
+        buf.write("\2\2\2\u0095\u0091\3\2\2\2\u0096\31\3\2\2\2\f!(\669J\\")
+        buf.write("mv}\u0095")
         return buf.getvalue()
 
 
@@ -88,15 +89,15 @@ class JacParser ( Parser ):
     sharedContextCache = PredictionContextCache()
 
     literalNames = [ "<INVALID>", "'if'", "'print'", "'readint'", "'readstr'", 
-                     "'+'", "'-'", "'*'", "'/'", "'%'", "'=='", "'!='", 
-                     "'>'", "'>='", "'<'", "'<='", "'('", "')'", "'{'", 
-                     "'}'", "'='", "','" ]
+                     "'while'", "'+'", "'-'", "'*'", "'/'", "'%'", "'=='", 
+                     "'!='", "'>'", "'>='", "'<'", "'<='", "'('", "')'", 
+                     "'{'", "'}'", "'='", "','" ]
 
     symbolicNames = [ "<INVALID>", "IF", "PRINT", "READINT", "READSTR", 
-                      "PLUS", "MINUS", "TIMES", "OVER", "REM", "EQ", "NE", 
-                      "GT", "GE", "LT", "LE", "OP_PAR", "CL_PAR", "OP_CUR", 
-                      "CL_CUR", "ATTRIB", "COMMA", "NAME", "NUMBER", "STRING", 
-                      "COMMENT", "NL", "SPACE", "INDENT", "DEDENT", "WHILE" ]
+                      "WHILE", "PLUS", "MINUS", "TIMES", "OVER", "REM", 
+                      "EQ", "NE", "GT", "GE", "LT", "LE", "OP_PAR", "CL_PAR", 
+                      "OP_CUR", "CL_CUR", "ATTRIB", "COMMA", "NAME", "NUMBER", 
+                      "STRING", "COMMENT", "NL", "SPACE", "INDENT", "DEDENT" ]
 
     RULE_program = 0
     RULE_main = 1
@@ -120,32 +121,32 @@ class JacParser ( Parser ):
     PRINT=2
     READINT=3
     READSTR=4
-    PLUS=5
-    MINUS=6
-    TIMES=7
-    OVER=8
-    REM=9
-    EQ=10
-    NE=11
-    GT=12
-    GE=13
-    LT=14
-    LE=15
-    OP_PAR=16
-    CL_PAR=17
-    OP_CUR=18
-    CL_CUR=19
-    ATTRIB=20
-    COMMA=21
-    NAME=22
-    NUMBER=23
-    STRING=24
-    COMMENT=25
-    NL=26
-    SPACE=27
-    INDENT=28
-    DEDENT=29
-    WHILE=30
+    WHILE=5
+    PLUS=6
+    MINUS=7
+    TIMES=8
+    OVER=9
+    REM=10
+    EQ=11
+    NE=12
+    GT=13
+    GE=14
+    LT=15
+    LE=16
+    OP_PAR=17
+    CL_PAR=18
+    OP_CUR=19
+    CL_CUR=20
+    ATTRIB=21
+    COMMA=22
+    NAME=23
+    NUMBER=24
+    STRING=25
+    COMMENT=26
+    NL=27
+    SPACE=28
+    INDENT=29
+    DEDENT=30
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
         super().__init__(input, output)
@@ -525,11 +526,11 @@ class JacParser ( Parser ):
                 if not ((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << JacParser.PRINT) | (1 << JacParser.NAME) | (1 << JacParser.NL))) != 0)):
                     break
 
-            self.state = 74
-            self.match(JacParser.CL_CUR)
             if 1:
                     print('NOT_IF_' + str(local_x) + ':')
                 
+            self.state = 75
+            self.match(JacParser.CL_CUR)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -686,12 +687,12 @@ class JacParser ( Parser ):
                 if not ((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << JacParser.PRINT) | (1 << JacParser.NAME) | (1 << JacParser.NL))) != 0)):
                     break
 
-            self.state = 92
-            self.match(JacParser.CL_CUR)
             if 1:
                     emit('goto BEGIN_WHILE_' + str(local_y), 0)
                     print('END_WHILE_' + str(local_y) + ':')
                 
+            self.state = 93
+            self.match(JacParser.CL_CUR)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -1016,8 +1017,9 @@ class JacParser ( Parser ):
                 self.state = 128
                 localctx._NUMBER = self.match(JacParser.NUMBER)
                 if 1:
-                        emit('ldc ' + (None if localctx._NUMBER is None else localctx._NUMBER.text) +1)
+                        emit('ldc ' + (None if localctx._NUMBER is None else localctx._NUMBER.text), +1)
                         localctx.type = 'i'
+
                     
                 pass
             elif token in [JacParser.STRING]:
@@ -1025,7 +1027,7 @@ class JacParser ( Parser ):
                 self.state = 130
                 localctx._STRING = self.match(JacParser.STRING)
                 if 1:
-                        emit('ldc ' + (None if localctx._STRING is None else localctx._STRING.text) +1)
+                        emit('ldc ' + (None if localctx._STRING is None else localctx._STRING.text), +1)
                         localctx.type = 's'
                     
                 pass
