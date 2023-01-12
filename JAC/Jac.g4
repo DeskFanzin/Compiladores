@@ -52,6 +52,8 @@ PRINT   : 'print'  ;
 READINT : 'readint';
 READSTR  : 'readstr';
 WHILE   : 'while'  ;
+BREAK   : 'break'  ;
+CONTINUE: 'continue';
 
 PLUS  : '+' ;
 MINUS : '-' ;
@@ -114,7 +116,7 @@ main:
     }
     ;
 
-statement: NL | st_print | st_attrib
+statement: NL | st_print | st_attrib | st_if | st_while | st_break | st_continue
     ;
 
 st_print:
@@ -219,6 +221,17 @@ comparison_while: expression op = ( EQ | NE | GT | GE | LT | LE ) expression
     }
     ;
 
+st_break: BREAK
+    {if 1:
+        print('goto END_WHILE_' + str(y-1))
+    }
+    ;
+
+st_continue: CONTINUE
+    {if 1:
+        print('goto BEGIN_WHILE_' + str(y-1))
+    }
+    ;
 
 
 
@@ -269,7 +282,8 @@ factor returns [type]: NUMBER
     }
     | NAME
     {if 1:
-        pass
+        print('    iload 0')
+        $type = 'i'
     }
     | READINT OP_PAR CL_PAR
     {if 1:
