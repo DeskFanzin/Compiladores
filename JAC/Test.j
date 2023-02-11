@@ -1,4 +1,4 @@
-.source Test.src
+.source Test
 .class  public Test
 .super  java/lang/Object
 
@@ -9,34 +9,23 @@
 .end method
 
 .method public static main([Ljava/lang/String;)V
-
-    getstatic java/lang/System/out Ljava/io/PrintStream;    ; delta=1
-    ldc "hello world"    ; delta=1
-    invokevirtual java/io/PrintStream/print(Ljava/lang/String;)V
-    ; delta=-2
-        getstatic java/lang/System/out Ljava/io/PrintStream;    ; delta=1
-        invokevirtual java/io/PrintStream/println()V
-    ; delta=-1
-    ldc 2    ; delta=1
+    ldc 1    ; delta=1
+    istore 0    ; delta=-1
+BEGIN_WHILE_0:
+    iload 0    ; delta=1
     ldc 10    ; delta=1
-    iadd
-    istore 0
-    getstatic java/lang/System/out Ljava/io/PrintStream;    ; delta=1
+    if_icmpgt END_WHILE_0    ; delta=-2
+    iload 0    ; delta=1
+    ldc 1    ; delta=1
+        iadd    ; delta=-1
+    istore 0    ; delta=-1
+    iload 0    ; delta=1
     ldc 2    ; delta=1
-    invokevirtual java/io/PrintStream/print(I)V
-    ; delta=-2
-        getstatic java/lang/System/out Ljava/io/PrintStream;    ; delta=1
-        invokevirtual java/io/PrintStream/println()V
-    ; delta=-1
-    getstatic java/lang/System/out Ljava/io/PrintStream;    ; delta=1
-    iload 0
-    invokevirtual java/io/PrintStream/print(I)V
-    ; delta=-2
-        getstatic java/lang/System/out Ljava/io/PrintStream;    ; delta=1
-        invokevirtual java/io/PrintStream/println()V
-    ; delta=-1
-    return
-.limit stack 10
-.end method
-
-; symbol_table: []
+    if_icmpne NOT_IF_0    ; delta=-2
+goto BEGIN_WHILE_0
+NOT_IF_0:
+    goto BEGIN_WHILE_0    ; delta=0
+    END_WHILE_0:    ; delta=0
+    iload 0    ; delta=1
+    ldc 0    ; delta=1
+    if_icmpeq NOT_IF_1    ; delta=-2
